@@ -2,14 +2,12 @@ const margin = { top: 50, right: 30, bottom: 100, left: 60 };
 const width = 960 - margin.left - margin.right;
 const height = 600 - margin.top - margin.bottom;
 
-// Append SVG to the container
 const svg = d3.select("#chart")
     .attr("width", width + margin.left + margin.right)
     .attr("height", height + margin.top + margin.bottom)
     .append("g")
     .attr("transform", `translate(${margin.left},${margin.top})`);
 
-// Create tooltip
 const tooltip = d3.select("#tooltip");
 
 // Load and process data
@@ -56,7 +54,7 @@ d3.csv("Drugs.csv", d3.autoType).then(rawData => {
         // Extract unique drugs for stacking keys
         const drugs = Array.from(new Set(filteredData.map(d => d["Indicator"])));
 
-        // Set up scales
+   
         const x = d3.scaleBand()
             .domain(transformedData.map(d => d.state))
             .range([0, width])
@@ -81,6 +79,13 @@ d3.csv("Drugs.csv", d3.autoType).then(rawData => {
             .selectAll("text")
             .attr("transform", "rotate(-45)")
             .style("text-anchor", "end");
+
+        // Add x-axis title
+        svg.append("text")
+            .attr("x", width / 2)
+            .attr("y", height + margin.bottom - 10) 
+            .style("text-anchor", "middle")
+            .text("States (USA)");
 
         // Add y-axis
         svg.append("g")
@@ -124,10 +129,9 @@ d3.csv("Drugs.csv", d3.autoType).then(rawData => {
             });
     }
 
-    // Initial chart display
     updateChart(years[0]);
 
-    // Update chart when a new year is selected
+    // Update chart when new year is selected
     yearSelect.on("change", function() {
         const selectedYear = +this.value;
         updateChart(selectedYear);
