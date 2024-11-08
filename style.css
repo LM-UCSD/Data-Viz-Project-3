@@ -1,12 +1,13 @@
+/* updating body for text */
 body {
     font-family: Arial, sans-serif;
-    display: flex;
-    flex-direction: column;
+    line-height: 1.6;
     align-items: center;
     justify-content: center;
     margin: 0;
+    padding: 20px;
+    background-color: #f9f9f9;
 }
-
 .chart-container {
     margin-top: 20px;
 }
@@ -21,3 +22,4 @@ body {
     font-size: 12px;
     opacity: 0;
 }
+
